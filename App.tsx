@@ -1,4 +1,4 @@
-import { Camera, CameraType } from 'expo-camera';
+import { AutoFocus, Camera, CameraType, FlashMode } from 'expo-camera';
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -8,7 +8,14 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Camera style={{ flex: 1 }} type={type}>
+      <Camera
+        style={{ flex: 1 }}
+        type={type}
+        ratio={'16:9'}
+        zoom={0}
+        flashMode={FlashMode.off}
+        autoFocus={AutoFocus.on}
+      >
         <View style={styles.mainView}>
           <TouchableOpacity
             style={styles.flipArea}
