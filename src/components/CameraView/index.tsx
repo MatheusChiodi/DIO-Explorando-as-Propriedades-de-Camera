@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { View, TouchableOpacity, Text, Modal, Image } from 'react-native';
-import { Camera, FlashMode, AutoFocus } from 'expo-camera';
+import { Camera, FlashMode, AutoFocus, ImageType } from 'expo-camera';
 import CameraViewProps from './interfaces/CameraViewProps';
 import * as MediaLibrary from 'expo-media-library';
 
@@ -12,8 +12,10 @@ export default function CameraView({ type, onFlipCamera }: CameraViewProps) {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   async function takePicture() {
+    const options = { quality: 1, imageType: ImageType.png };
+
     if (camRef && camRef.current) {
-      const data = await camRef.current.takePictureAsync();
+      const data = await camRef.current.takePictureAsync(options);
       setModalIsOpen(true);
       setCapturedPhoto(data.uri);
     }
@@ -21,11 +23,13 @@ export default function CameraView({ type, onFlipCamera }: CameraViewProps) {
 
   async function savePicture() {
     if (capturedPhoto != null) {
-      await MediaLibrary.saveToLibraryAsync(capturedPhoto).then(() => {
-        setModalIsOpen(false);
-        setCapturedPhoto(null);
-      });
+      await saveToAlbum(capturedPhoto, 'ExplorandoAppDeCamera')
     }
+  }
+
+  async function saveToAlbum(uri: string, album: string) {
+    const asset = await MediaLibrary.createAssetAsync(uri);
+    await MediaLibrary.createAlbumAsync(album, asset);
   }
 
   return (
@@ -77,7 +81,7 @@ export default function CameraView({ type, onFlipCamera }: CameraViewProps) {
             </View>
 
             <Image
-              style={{ width: '100%', height: 300, borderRadius: 20 }}
+              style={{ width: '100%', height: 450, borderRadius: 20 }}
               source={{ uri: capturedPhoto }}
             />
           </View>
