@@ -13,7 +13,7 @@ export default function CameraView({ type, onFlipCamera }: CameraViewProps) {
       autoFocus={AutoFocus.on}
     >
       <View style={styles.mainView}>
-        <TouchableOpacity style={styles.flipArea} onPress={() => onFlipCamera}>
+        <TouchableOpacity style={styles.flipArea} onPress={onFlipCamera}>
           <Text style={styles.flipText}>Flip Camera</Text>
         </TouchableOpacity>
       </View>

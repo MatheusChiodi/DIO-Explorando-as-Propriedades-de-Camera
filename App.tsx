@@ -1,34 +1,19 @@
-import { AutoFocus, Camera, CameraType, FlashMode } from 'expo-camera';
-import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Camera, CameraType } from 'expo-camera';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import CameraView from './src/components/CameraView';
 
 export default function App() {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
 
+  const flipCamera = () => {
+    setType(type === CameraType.back ? CameraType.front : CameraType.back);
+  };
+
   return (
     <View style={styles.container}>
-      <Camera
-        style={{ flex: 1 }}
-        type={type}
-        ratio={'16:9'}
-        zoom={0}
-        flashMode={FlashMode.off}
-        autoFocus={AutoFocus.on}
-      >
-        <View style={styles.mainView}>
-          <TouchableOpacity
-            style={styles.flipArea}
-            onPress={() =>
-              setType(
-                type === CameraType.back ? CameraType.front : CameraType.back
-              )
-            }
-          >
-            <Text style={styles.flipText}>Flip Camera</Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
+      <CameraView type={type} onFlipCamera={flipCamera} />
     </View>
   );
 }
