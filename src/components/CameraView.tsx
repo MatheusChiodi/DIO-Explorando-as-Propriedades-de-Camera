@@ -1,7 +1,8 @@
-import { Camera, FlashMode, AutoFocus, CameraType } from 'expo-camera';
 import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { Camera, FlashMode, AutoFocus, CameraType } from 'expo-camera';
+import CameraViewProps from '../interfaces/CameraViewProps';
 
-export default function CameraView({ type, onFlipCamera }) {
+export default function CameraView({ type, onFlipCamera }: CameraViewProps) {
   return (
     <Camera
       style={{ flex: 1 }}
