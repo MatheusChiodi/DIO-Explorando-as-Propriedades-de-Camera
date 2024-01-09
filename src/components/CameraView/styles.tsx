@@ -16,6 +16,16 @@ const styles = StyleSheet.create({
     marginBottom: 13,
     color: 'white',
   },
+  takePhoto: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+  },
+  takePhotoText: {
+    fontSize: 20,
+    marginBottom: 13,
+    color: 'white',
+  },
 });
 
 export default styles;
