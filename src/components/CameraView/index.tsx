@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Text, Modal, Image } from 'react-native';
 import { Camera, FlashMode, AutoFocus, ImageType } from 'expo-camera';
 import CameraViewProps from './interfaces/CameraViewProps';
 import * as MediaLibrary from 'expo-media-library';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import styles from './styles';
 
@@ -23,7 +24,7 @@ export default function CameraView({ type, onFlipCamera }: CameraViewProps) {
 
   async function savePicture() {
     if (capturedPhoto != null) {
-      await saveToAlbum(capturedPhoto, 'ExplorandoAppDeCamera')
+      await saveToAlbum(capturedPhoto, 'ExplorandoAppDeCamera');
     }
   }
 
@@ -44,11 +45,11 @@ export default function CameraView({ type, onFlipCamera }: CameraViewProps) {
     >
       <View style={styles.mainView}>
         <TouchableOpacity style={styles.flipArea} onPress={onFlipCamera}>
-          <Text style={styles.flipText}>Flip Camera</Text>
+          <FontAwesome5 name="sync" size={40} color="#fff" />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.takePhoto} onPress={takePicture}>
-          <Text style={styles.takePhotoText}>Take Picture</Text>
+          <FontAwesome5 name="camera" size={40} color="#fff" />
         </TouchableOpacity>
       </View>
 
@@ -64,19 +65,22 @@ export default function CameraView({ type, onFlipCamera }: CameraViewProps) {
           >
             <View
               style={{
+                width: '100%',
+                marginBottom: 10,
                 display: 'flex',
                 flexDirection: 'row',
+                justifyContent: 'space-between',
               }}
             >
               <TouchableOpacity
                 style={{ margin: 10 }}
                 onPress={() => setModalIsOpen(false)}
               >
-                <Text style={{ fontSize: 20 }}>Close</Text>
+                <FontAwesome5 name="times" size={40} color="#000" />
               </TouchableOpacity>
 
               <TouchableOpacity style={{ margin: 10 }} onPress={savePicture}>
-                <Text style={{ fontSize: 20 }}>Save</Text>
+                <FontAwesome5 name="save" size={40} color="#000" />
               </TouchableOpacity>
             </View>
 
