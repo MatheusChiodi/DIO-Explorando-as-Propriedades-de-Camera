@@ -1,5 +1,5 @@
 import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
-import { Camera, FlashMode, AutoFocus, CameraType } from 'expo-camera';
+import { Camera, FlashMode, AutoFocus } from 'expo-camera';
 import CameraViewProps from '../interfaces/CameraViewProps';
 
 export default function CameraView({ type, onFlipCamera }: CameraViewProps) {
@@ -22,10 +22,6 @@ export default function CameraView({ type, onFlipCamera }: CameraViewProps) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
   mainView: {
     flex: 1,
     backgroundColor: 'transparent',
